@@ -4,7 +4,7 @@ import {
   eventLevels,
   inRange,
   segsOverlap,
-  sortEvents,
+  sortEventsDefault,
 } from '../../src/utils/eventLevels'
 
 describe('endOfRange', () => {
@@ -480,13 +480,13 @@ describe('sortEvents', () => {
     }
 
     test('it returns a positive number when event B starts on a day before the start day of event A', () => {
-      const result = sortEvents(laterEvent, earlierEvent, accessors)
+      const result = sortEventsDefault(laterEvent, earlierEvent, accessors)
 
       expect(result).toBeGreaterThan(0)
     })
 
     test('it returns a negative number when event A starts on a day before the start day of event B', () => {
-      const result = sortEvents(earlierEvent, laterEvent, accessors)
+      const result = sortEventsDefault(earlierEvent, laterEvent, accessors)
 
       expect(result).toBeLessThan(0)
     })
@@ -504,13 +504,13 @@ describe('sortEvents', () => {
       }
 
       test('it returns a positive number when event B has a longer duration than event A', () => {
-        const result = sortEvents(shorterEvent, longerEvent, accessors)
+        const result = sortEventsDefault(shorterEvent, longerEvent, accessors)
 
         expect(result).toBeGreaterThan(0)
       })
 
       test('it returns a negative number when event A has a longer duration than event B', () => {
-        const result = sortEvents(longerEvent, shorterEvent, accessors)
+        const result = sortEventsDefault(longerEvent, shorterEvent, accessors)
 
         expect(result).toBeLessThan(0)
       })
@@ -530,13 +530,21 @@ describe('sortEvents', () => {
         }
 
         test('it returns a positive number when event B is an all day event', () => {
-          const result = sortEvents(nonAllDayEvent, allDayEvent, accessors)
+          const result = sortEventsDefault(
+            nonAllDayEvent,
+            allDayEvent,
+            accessors
+          )
 
           expect(result).toBeGreaterThan(0)
         })
 
         test('it returns a negative number when event A is an all day event', () => {
-          const result = sortEvents(allDayEvent, nonAllDayEvent, accessors)
+          const result = sortEventsDefault(
+            allDayEvent,
+            nonAllDayEvent,
+            accessors
+          )
 
           expect(result).toBeLessThan(0)
         })
@@ -555,7 +563,11 @@ describe('sortEvents', () => {
         }
 
         test('it returns zero', () => {
-          const result = sortEvents(allDayEvent, otherAllDayEvent, accessors)
+          const result = sortEventsDefault(
+            allDayEvent,
+            otherAllDayEvent,
+            accessors
+          )
 
           expect(result).toBe(0)
         })
@@ -574,20 +586,24 @@ describe('sortEvents', () => {
         }
 
         test('it returns a positive number when event B starts at an earlier time than event A', () => {
-          const result = sortEvents(laterEvent, earlierEvent, accessors)
+          const result = sortEventsDefault(laterEvent, earlierEvent, accessors)
 
           expect(result).toBeGreaterThan(0)
         })
 
         test('it returns a negative number when event A starts at an earlier time than event B', () => {
-          const result = sortEvents(earlierEvent, laterEvent, accessors)
+          const result = sortEventsDefault(earlierEvent, laterEvent, accessors)
 
           expect(result).toBeLessThan(0)
         })
 
         test('it returns zero when both events start at the same time', () => {
           const otherEarlierEvent = Object.assign({}, earlierEvent)
-          const result = sortEvents(earlierEvent, otherEarlierEvent, accessors)
+          const result = sortEventsDefault(
+            earlierEvent,
+            otherEarlierEvent,
+            accessors
+          )
 
           expect(result).toBe(0)
         })

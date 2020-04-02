@@ -12,7 +12,7 @@ import TimeGutter from './TimeGutter'
 import getWidth from 'dom-helpers/width'
 import TimeGridHeader from './TimeGridHeader'
 import { notify } from './utils/helpers'
-import { inRange, sortEvents } from './utils/eventLevels'
+import { inRange, sortEventsDefault } from './utils/eventLevels'
 import Resources from './utils/Resources'
 import { DayLayoutAlgorithmPropType } from './utils/propTypes'
 
@@ -164,6 +164,7 @@ export default class TimeGrid extends Component {
       max,
       showMultiDayTimes,
       longPressThreshold,
+      sortEvents = sortEventsDefault,
     } = this.props
 
     width = width || this.state.gutterWidth
@@ -326,6 +327,7 @@ TimeGrid.propTypes = {
   components: PropTypes.object.isRequired,
   getters: PropTypes.object.isRequired,
   localizer: PropTypes.object.isRequired,
+  sortEvents: PropTypes.func,
 
   selected: PropTypes.object,
   selectable: PropTypes.oneOf([true, false, 'ignoreEvents']),

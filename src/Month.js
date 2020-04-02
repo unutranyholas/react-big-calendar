@@ -17,7 +17,7 @@ import DateContentRow from './DateContentRow'
 import Header from './Header'
 import DateHeader from './DateHeader'
 
-import { inRange, sortEvents } from './utils/eventLevels'
+import { inRange, sortEventsDefault } from './utils/eventLevels'
 
 let eventsForWeek = (evts, start, end, accessors) =>
   evts.filter(e => inRange(e, start, end, accessors))
@@ -102,6 +102,7 @@ class MonthView extends React.Component {
       longPressThreshold,
       accessors,
       getters,
+      sortEvents = sortEventsDefault,
     } = this.props
 
     const { needLimitMeasure, rowLimit } = this.state
@@ -314,6 +315,7 @@ MonthView.propTypes = {
   components: PropTypes.object.isRequired,
   getters: PropTypes.object.isRequired,
   localizer: PropTypes.object.isRequired,
+  sortEvents: PropTypes.func,
 
   selected: PropTypes.object,
   selectable: PropTypes.oneOf([true, false, 'ignoreEvents']),
