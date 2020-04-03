@@ -526,6 +526,11 @@ class Calendar extends React.Component {
     sortEvents: PropTypes.func,
 
     /**
+     * Disable row limit logic on month view
+     */
+    noRowLimit: PropTypes.bool,
+
+    /**
      * Support to show multi-day events with specific start and end times in the
      * main time grid (rather than in the all day header).
      *
@@ -910,7 +915,12 @@ class Calendar extends React.Component {
     return (
       <div
         {...elementProps}
-        className={clsx(className, 'rbc-calendar', props.rtl && 'rbc-rtl')}
+        className={clsx(
+          className,
+          'rbc-calendar',
+          props.noRowLimit ? 'rbc-calendar_no-row-limit' : null,
+          props.rtl && 'rbc-rtl'
+        )}
         style={style}
       >
         {toolbar && (

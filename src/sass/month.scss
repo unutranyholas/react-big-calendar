@@ -61,6 +61,12 @@
   }
 }
 
+.rbc-calendar_no-row-limit .rbc-month-row {
+  overflow: visible;
+  flex: auto;
+  flex-basis: 150px;
+}
+
 .rbc-date-cell {
   flex: 1 1 0;
   min-width: 0;

@@ -29,19 +29,30 @@ class MonthView extends React.Component {
     this._bgRows = []
     this._pendingSelection = []
     this.slotRowRef = React.createRef()
-    this.state = {
-      rowLimit: 5,
-      needLimitMeasure: true,
-    }
+    this.state = this.props.noRowLimit
+      ? {
+          rowLimit: Infinity,
+          needLimitMeasure: false,
+        }
+      : {
+          rowLimit: 5,
+          needLimitMeasure: true,
+        }
   }
 
   UNSAFE_componentWillReceiveProps({ date }) {
+    if (this.props.noRowLimit) {
+      return
+    }
     this.setState({
       needLimitMeasure: !dates.eq(date, this.props.date, 'month'),
     })
   }
 
   componentDidMount() {
+    if (this.props.noRowLimit) {
+      return
+    }
     let running
 
     if (this.state.needLimitMeasure) this.measureRowLimit(this.props)
@@ -61,10 +72,16 @@ class MonthView extends React.Component {
   }
 
   componentDidUpdate() {
+    if (this.props.noRowLimit) {
+      return
+    }
     if (this.state.needLimitMeasure) this.measureRowLimit(this.props)
   }
 
   componentWillUnmount() {
+    if (this.props.noRowLimit) {
+      return
+    }
     window.removeEventListener('resize', this._resizeListener, false)
   }
 
@@ -316,6 +333,7 @@ MonthView.propTypes = {
   getters: PropTypes.object.isRequired,
   localizer: PropTypes.object.isRequired,
   sortEvents: PropTypes.func,
+  noRowLimit: PropTypes.bool,
 
   selected: PropTypes.object,
   selectable: PropTypes.oneOf([true, false, 'ignoreEvents']),
