@@ -1,6 +1,6 @@
 {
   "name": "fibery-react-big-calendar",
-  "version": "0.23.0",
+  "version": "0.23.1",
   "description": "Calendar! with events",
   "author": {
     "name": "Ihar Trafimovich",
@@ -143,12 +143,9 @@
     "babel-core": "7.0.0-bridge.0"
   },
   "bugs": {
-    "url": "https://github.com/intljusticemission/react-big-calendar/issues"
+    "url": "https://github.com/unutranyholas/react-big-calendar/issues"
   },
   "readme": "ERROR: No README data found!",
-  "homepage": "https://github.com/intljusticemission/react-big-calendar#readme",
-  "_id": "react-big-calendar@0.22.1",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  }
+  "homepage": "https://github.com/unutranyholas/react-big-calendar#readme",
+  "_id": "fibery-react-big-calendar@0.23.1"
 }
